@@ -1,0 +1,1 @@
+{"insecure-registries": ["localhost:5000", "kind-registry:5000"]}
