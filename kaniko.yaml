@@ -10,7 +10,7 @@ spec:
       containers:
       - name: build
         image: gcr.io/kaniko-project/executor:latest
-        args: ["-c", "/workspace/build/", "--insecure", "-d", "kind-registry:5000/nodejs-test:2.0"]
+        args: ["-c", "/workspace/build/", "--insecure", "-d", "kind-registry:5000/nodejs-test:3.0"]
         # env:
         # - name: DOCKER_CONFIG
         #   value: "/kaniko/secrets"
