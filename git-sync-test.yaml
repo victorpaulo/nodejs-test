@@ -32,7 +32,7 @@ spec:
           mountPath: /etc/git-secret
         env:
         - name: GIT_SYNC_REPO
-          value: git@github.com:victorpaulo/nodejs-test.git
+          value: git@bitbucket.org:victorpalmeida/kind-k8s.git
         - name: GIT_SYNC_BRANCH
           value: master
         - name: GIT_SYNC_ROOT
