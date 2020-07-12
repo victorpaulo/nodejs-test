@@ -1,4 +1,6 @@
-# test
+# Test Repo
+
+### Use Kaniko to build an image inside Kubernetes and use git-sync project to clone the code from secure repo;
 
 ```bash
 ssh-keygen -t rsa -N "" -f mykey
