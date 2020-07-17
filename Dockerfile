@@ -8,8 +8,6 @@ WORKDIR /app
 # where available (npm@5+)
 COPY package*.json ./
 
-RUN echo "hello 1.0"
-
 RUN npm install
 
 # Bundle app source
