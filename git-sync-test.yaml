@@ -20,25 +20,25 @@ spec:
         args: [ "3600" ]
         volumeMounts:
         - name: service
-          mountPath: /var/magic
+          mountPath: /workspace
       initContainers:
       - name: git-sync
         image: k8s.gcr.io/git-sync:v3.1.6
         imagePullPolicy: Always
         volumeMounts:
         - name: service
-          mountPath: /magic
+          mountPath: /workspace
         - name: git-secret
           mountPath: /etc/git-secret
         env:
         - name: GIT_SYNC_REPO
-          value: git@bitbucket.org:victorpalmeida/kind-k8s.git
+          value: https://github.com/victorpaulo/nodejs-test.git
         - name: GIT_SYNC_BRANCH
           value: master
         - name: GIT_SYNC_ROOT
-          value: /magic
+          value: /workspace
         - name: GIT_SYNC_DEST
-          value: tmp
+          value: build
         - name: GIT_SYNC_PERMISSIONS
           value: "0777"
         - name: GIT_SYNC_ONE_TIME

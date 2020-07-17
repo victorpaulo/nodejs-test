@@ -1,0 +1,72 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: build-job
+  labels:
+    app: kaniko-example
+spec:
+  template:
+    spec:
+      containers:
+      - name: build
+        image: gcr.io/kaniko-project/executor:latest
+        args: ["-c", "/workspace/build/", "--insecure", "-d", "kind-registry:5000/nodejs-test:3.0"]
+        # env:
+        # - name: DOCKER_CONFIG
+        #   value: "/kaniko/secrets"
+        volumeMounts:
+        - name: build-context
+          mountPath: /workspace
+        # - name: docker-config
+        #   mountPath: "/kaniko/secrets"
+        #   readOnly: true
+      # initContainers:
+      # - name: clone
+      #   image: alpine:3.7
+      #   command: ["/bin/sh","-c"]
+      #   args: ['apk add --no-cache git && git clone https://github.com/victorpaulo/nodejs-test.git /workspace/build/']
+      #   volumeMounts:
+      #   - name: build-context
+      #     mountPath: /workspace
+      # restartPolicy: Never
+      # volumes:
+      # - name: build-context
+      #   emptyDir: {}
+      # - name: docker-config
+      #   secret:
+      #     secretName: docker-config
+      initContainers:
+      - name: git-sync
+        image: k8s.gcr.io/git-sync:v3.1.6
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: build-context
+          mountPath: /workspace
+        - name: git-secret
+          mountPath: /etc/git-secret
+        env:
+        - name: GIT_SYNC_REPO
+          value: git@bitbucket.org:victorpalmeida/kind-k8s.git
+        - name: GIT_SYNC_BRANCH
+          value: master
+        - name: GIT_SYNC_ROOT
+          value: /workspace
+        - name: GIT_SYNC_DEST
+          value: tmp
+        - name: GIT_SYNC_PERMISSIONS
+          value: "0777"
+        - name: GIT_SYNC_ONE_TIME
+          value: "true"
+        - name: GIT_SYNC_SSH
+          value: "true"
+        - name: GIT_KNOWN_HOSTS
+          value: "true"
+        securityContext:
+          runAsUser: 0
+      volumes:
+      - name: build-context
+        emptyDir: {}
+      - name: git-secret
+        secret:
+          defaultMode: 256
+          secretName: git-creds # your-ssh-key
