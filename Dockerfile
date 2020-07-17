@@ -12,10 +12,8 @@ RUN npm install
 # If you are building your code for production
 # RUN npm install --only=production
 
-RUN ls -l /app && ls -l /workspace/build
-
 # Bundle app source
-ADD . .
+COPY . /app
 
 EXPOSE 3000
 CMD [ "npm", "start" ]
