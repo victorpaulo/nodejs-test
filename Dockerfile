@@ -12,6 +12,8 @@ RUN npm install
 # If you are building your code for production
 # RUN npm install --only=production
 
+RUN echo "hello 1.0"
+
 # Bundle app source
 COPY . /app
 
