@@ -8,10 +8,10 @@ WORKDIR /app
 # where available (npm@5+)
 COPY package*.json ./
 
-RUN npm install
-
 # Bundle app source
-COPY /workspace/build /app
+COPY . .
+
+RUN npm install
 
 EXPOSE 3000
 CMD [ "npm", "start" ]
