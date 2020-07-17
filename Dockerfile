@@ -1,4 +1,4 @@
-FROM node:8
+FROM node:latest
 
 # Create app directory
 WORKDIR /app
@@ -8,11 +8,9 @@ WORKDIR /app
 # where available (npm@5+)
 COPY package*.json ./
 
-RUN npm install
-# If you are building your code for production
-# RUN npm install --only=production
-
 RUN echo "hello 1.0"
+
+RUN npm install
 
 # Bundle app source
 COPY . /app
