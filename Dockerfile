@@ -13,7 +13,7 @@ RUN npm install
 # RUN npm install --only=production
 
 # Bundle app source
-COPY /workspace/build /usr/src/app
+COPY . .
 
 EXPOSE 3000
 CMD [ "npm", "start" ]
