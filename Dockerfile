@@ -15,7 +15,7 @@ RUN npm install
 RUN ls -l /app && ls -l /workspace/build
 
 # Bundle app source
-COPY . .
+ADD . .
 
 EXPOSE 3000
 CMD [ "npm", "start" ]
