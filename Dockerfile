@@ -1,7 +1,11 @@
 FROM node:8
 
+USER node
+
+RUN mkdir -p /usr/src/app && chown -R node:node /usr/src/app
+
 # Create app directory
-WORKDIR /workspace/build
+WORKDIR /usr/src/app
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -13,7 +17,7 @@ RUN npm install
 # RUN npm install --only=production
 
 # Bundle app source
-COPY /workspace/build /workspace/build
+COPY --chown=node:node . .
 
 EXPOSE 3000
 CMD [ "npm", "start" ]
