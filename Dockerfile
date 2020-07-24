@@ -9,7 +9,7 @@ WORKDIR /app
 COPY package.json .
 
 # Bundle app source
-COPY . .
+COPY build/* .
 
 RUN ls -la && echo "${PWD}" && npm install
 
