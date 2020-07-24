@@ -11,7 +11,7 @@ COPY package.json .
 # Bundle app source
 COPY . .
 
-RUN npm install && echo "${PWD}" && ls -lH /app/build
+RUN npm install && echo "${PWD}" && ls -la
 
 EXPOSE 3000
 CMD [ "npm", "start" ]
