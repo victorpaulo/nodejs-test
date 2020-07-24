@@ -1,7 +1,7 @@
-FROM node:latest
+FROM node:12
 
 # Create app directory
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -14,4 +14,6 @@ COPY . .
 RUN npm install && echo "${PWD}" && ls -la
 
 EXPOSE 3000
-CMD [ "npm", "start" ]
+# CMD [ "npm", "start" ]
+
+CMD [ "node", "index.js" ]
